@@ -194,3 +194,21 @@ footer{margin-top:96px;padding:28px 0 56px;font-size:13px;color:var(--ink2);disp
    is wider than the card; let chips wrap only on very narrow screens. */
 @media (prefers-reduced-transparency:reduce){.card{background:#fff;backdrop-filter:none;-webkit-backdrop-filter:none}}
 @media (max-width:360px){.chip{white-space:normal;line-height:1.25}}
+/* Not in the mock: clouds drift slowly on wide screens. Four copies of the sky sit 85vw apart,
+   each fading out over its outer 15%, so neighbours cross-fade and the loop (one 85vw step)
+   has no seam. Phones and prefers-reduced-motion keep the static sky above. */
+.sky{overflow:hidden}
+.sky-track{display:none}
+@media (min-width:761px) and (prefers-reduced-motion:no-preference){
+  .sky-track{display:block;position:absolute;inset:0;will-change:transform;animation:sky-drift 150s linear infinite}
+  .sky-track i{position:absolute;top:0;width:100vw;height:100%;background:url('/sky.webp') center/cover no-repeat;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 15%,#000 85%,transparent 100%);
+    mask-image:linear-gradient(90deg,transparent 0,#000 15%,#000 85%,transparent 100%)}
+  .sky-track i:nth-child(1){left:-85vw}
+  .sky-track i:nth-child(2){left:0}
+  .sky-track i:nth-child(3){left:85vw}
+  .sky-track i:nth-child(4){left:170vw}
+  /* the static image under the track would show through the fades as a still copy */
+  .sky{background:linear-gradient(180deg,#B4D2E2 0%,#CBDEE3 28%,#DCE8E0 52%,#E6EDDD 74%,#F1EFE2 100%)}
+}
+@keyframes sky-drift{from{transform:translate3d(0,0,0)}to{transform:translate3d(-85vw,0,0)}}

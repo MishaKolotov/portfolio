@@ -47,7 +47,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <a className="skip" href="#main">
           {labels.skip}
         </a>
-        <div className="sky" aria-hidden="true"></div>
+        <div className="sky" aria-hidden="true">
+          <div className="sky-track">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+          </div>
+        </div>
         <div className="sun" aria-hidden="true"></div>
         {children}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd(url)).replace(/</g, '\\u003c') }} />
