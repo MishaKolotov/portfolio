@@ -1,0 +1,166 @@
+# Mikhail Kolatau
+
+> Senior Full-Stack AI Engineer (TypeScript, React, Angular, Node.js)
+
+I build AI products. And I test the models behind them.
+
+Ten years building web products in TypeScript. Since 2025, AI work too: Lumigo, OpenAI's AI Lab on contract, and my own LLM job-search bot in production.
+
+Open to a new role · can start in two weeks
+Warsaw (CET) · EU work-authorised · remote in Europe · B2B through my own company · English: full professional
+
+## Contact
+
+- Book a call: https://calendar.app.google/jp7854e7MJPsHjSCA
+- Email: mishakolotov1@gmail.com
+- Telegram: https://t.me/gigamike666
+- LinkedIn: https://linkedin.com/in/mikhail-kolatau
+- GitHub: https://github.com/MishaKolotov
+
+## Experience
+
+### Contract work through Digis
+Feb 2026 → now · Digis is a contracting agency
+
+#### OpenAI AI Lab · AI Evaluation Expert and Domain Reviewer
+Aug → Oct 2026 · alongside Oreamnos
+
+I wrote hard software research tasks, ran the model on them and graded its answers against a rubric.
+- Three tasks delivered. Each came with a rubric of 60 to 97 items, every item backed by a source.
+- Promoted to reviewer of other experts' tasks a week in. Five submissions reviewed.
+- I ran the model on every task to find where it really failed, and wrote up each failure with the source that disproves it.
+- Built tooling for the work: five Claude Code skills and a rubric linter that runs on every edit.
+Stack: LLM evals, rubric design, Claude Code
+
+#### Oreamnos · Senior Full-Stack Engineer
+Feb 2026 → now
+
+Four Angular products and a Spring Boot service for German compliance teams.
+- Main frontend author of two products: document management and a whistleblowing platform.
+- Wrote the Playwright E2E suite, 169 tests in 31 files.
+- Put a Tiptap rich-text editor (React 19) inside the Angular app, with support for collaborative editing. Built a reporting library with drag-and-drop dashboards on GridStack and ECharts.
+- E-invoice validation product, merged to staging. I built the Angular 21 frontend on my own layer of 31 components, plus part of the Spring Boot backend (multi-tenancy, sign-up with email verification, rate limiting).
+- Second-largest contributor to the shared design system of 80 components, used by three product apps. Led its upgrade from Angular 20 to 21 in a day.
+Stack: Angular 21, Nx, NgRx Signals, PrimeNG, Tailwind 4, Tiptap, Playwright, Spring Boot, Keycloak, WCAG AA
+
+### Pynea · Senior Software Engineer
+Feb → Apr 2026 · fixed-scope contract, alongside Oreamnos
+
+Enterprise HR software, London-based. Next.js 15 and TypeScript, a monorepo of 17 packages.
+- Led the redesign of the Settings area, 8+ screens, from Figma to production.
+- Built interview scheduling on GraphQL, plus roles and permissions for the multi-tenant product.
+- Fixed keyboard focus in the shared dialog system: a focus trap that blocked inputs, and focus handling in nested drawers and dialogs.
+Stack: Next.js 15, React 18, GraphQL / Apollo, Zustand, Radix, Storybook, Turborepo
+
+### Lumigo · Senior Software Developer
+Feb → Nov 2025 · ended when the company was acquired
+
+Monitoring for cloud and LLM apps. A frontend monorepo of 100+ packages.
+- Main author of the AI / LLM part of the product UI.
+- Shipped the LLM evaluation screens and wrote, on my own, the module that aggregates their scores.
+- Built the LLM trace view for five providers, with token cost per call and OpenTelemetry spans.
+- The five providers: OpenAI, Anthropic, Amazon Bedrock, Gemini, Vertex.
+- Second most active contributor to the frontend over the period.
+- Main author of Logs Live Tail, real-time log streaming over GraphQL subscriptions. Built the LLM traces table on AG Grid with server-side loading.
+- Ran releases every two weeks and live customer demos, mentored engineers, led code reviews.
+Stack: Angular 19, Nx, RxJS, AG Grid, Cytoscape.js, Highcharts, Cypress, feature flags
+
+### Kaseya (Pulseway) · Software Development Engineer
+Aug 2021 → Feb 2025
+
+Remote monitoring software for IT teams. Led the team and ran hiring interviews.
+- Moved the app from Angular 12 to 18: build time 272 s → 99 s, known vulnerabilities 65 → 3.
+- Built the Security page (two-factor enforcement, IP allow-list) and the shared search and filter bar.
+- Moved 30% of components from legacy LESS to Tailwind and added React modules to the Angular app through Module Federation.
+- White-label build on a feature branch: the brand name became a setting across the app's views and code, 2,170 unused files removed.
+Stack: Angular, AngularJS, NGXS, NgRx, Module Federation, React widgets, Tailwind
+
+### ICE Mortgage Technology · Senior Software Development Engineer
+Mar 2020 → Aug 2021
+
+A large US mortgage platform, part of Intercontinental Exchange. Angular with React modules inside.
+- Designed the layer that lets the Angular and React parts of the product talk to each other.
+- Cut page load time from about 4.5 s to 2.7 s.
+Stack: Angular, React, Redux, micro-frontends, Jest, GitLab CI
+
+### Earlier: Strateg Group, Full-Stack Developer (Angular 2+, PHP), 2016–2020
+A start-up in Minsk. I chose Angular 2+ as the main framework, built the backend on Symfony and Laravel, and took features from requirements to release.
+Stack: Angular 2+, Symfony, Laravel
+
+## Projects
+
+My own projects. The specs, decisions and measurements are mine. Claude Code, an AI coding agent, writes most of the code.
+
+### GigaWork · in production since June 2026
+A Telegram bot that finds jobs for me. It pulls postings from 18 sources, drops the wrong ones with simple rules before any model call, and has a model score the rest.
+- 37,702: postings collected by October 2026
+- 47 of 60: good postings (ones I applied to or the bot sent me) pass the scorer I shipped. The old one, re-run, passes 35.
+- One thing I caught by measuring. The bot was paying a model to score postings that had nothing to do with my work, nurses and lawyers among them: 1,365 of 4,845 paid scores in three weeks came out near zero. I added a free check on the job title that runs before any paid call.
+- I test scoring on 80 real postings labelled by outcome. After a model change I re-ran them: scores fell about 8 points and the live threshold of 60 still held.
+- Posting text reaches the model wrapped as data, as a defence against prompt injection. The agents that read it get only allow-listed tools.
+- The job queue is plain Postgres. Workers take rows with an atomic claim, with no separate queue service.
+- It also built CVs and cover letters on demand from a structured record of my whole career, with the facts pinned so nothing got invented.
+- If one model provider fails, the next one takes over. A failed provider is parked for its retry window (a circuit breaker).
+- 11 LLM-judge agents check each generated CV, and two can block it. The judges are not yet checked against human labels.
+- An e-mail application goes out only after I press Send, and never twice.
+- I measured the Batch API at 2.3 times the price of cached calls ($0.0047 against $0.0020 per posting), so I dropped it before launch.
+Stack: TypeScript, Next.js, Node.js, Postgres (Neon), SQL, Drizzle, Claude, Gemini, Zod, Vitest
+Scoring code on GitHub: https://github.com/MishaKolotov/llm-job-triage
+
+### GigaMixer · live
+Mixing a multitrack recording in the browser. You type what is wrong ("the vocal is buried") and a model turns it into a checked list of changes.
+- A cheap model answers first. If the answer fails validation or the call fails, it retries once on a stronger model.
+- Guardrails live in code, not in the prompt: the server clamps every change the model proposes to an allowed range.
+- A test set of 150 labelled phrases with pass thresholds, including attempts to trick the model.
+- A Python worker separates instruments from a recording with local models.
+Stack: Next.js, Anthropic SDK, tool calling, shadcn/ui, Demucs, Supabase, Cloudflare R2
+Open the app: https://automix-delta.vercel.app
+
+### big-s-studio · live
+The site of my recording studio. Artists leave comments right on the audio waveform, and I update the site from a Telegram bot. It has its own design system.
+- 63 design tokens (colours, fonts, spacing) from one JSON source, generated as code for web, iOS, Android and Windows.
+- The build fails if text contrast drops below WCAG AA, the accessibility standard.
+Stack: Next.js 16, React 19, Server Components, Web Audio API, design tokens, Drizzle
+Open the site: https://gigamike666.com
+
+### bandcamp-daily · runs daily
+Picks one new release a day from my Bandcamp collection. A small audio model compares how releases sound, and that raised ranking quality (MRR) from 0.118 to 0.200. I tuned and tested on the same data, so the number is optimistic.
+Stack: TypeScript, Node.js 20, ONNX, embeddings, GitHub Actions
+
+### More projects
+
+- Bandcogs (in progress): An app for bands. Next.js, NestJS, React Native with Expo, Supabase.
+- agent-harness (public repo): Safety rules for coding agents. Every rule has a test that proves it blocks what it should.
+- ctaio-jobfit (live demo): Matches a CV to 406 open postings with one model call.
+- under-big-black-sun (live): A photo zine in English and Polish. Payload CMS, Next.js 15, Postgres.
+- SpeakNow (public repo): Video recording in the browser that adapts quality to connection speed. Angular 21.
+- Manyas E2E (public repo): Playwright tests for a survey in 10 languages on three devices. Client work.
+- MixFeedback (public repo): Real-time comments on a track. NestJS, Angular 19. A study project.
+- quiz (private repo): My study tool. A model grades spoken answers about code against a rubric.
+- tg-summary-bot (runs locally): Summarises long Telegram chats with Gemini. Python.
+
+## Skills and stack
+
+- AI / LLM: structured outputs, tool calling, LLM evals, Claude API, prompt caching, LLM observability, LLM-as-judge, model routing and fallback, cheap model first, stronger one on failure, cost and latency tracking, prompt-injection defences, agents with least privilege, browser agents, human approval before irreversible steps, embeddings, cosine similarity, Whisper speech-to-text, Gemini
+- Frontend: TypeScript, JavaScript, Angular 2 → 21, React 18–19, Next.js 15–16, SSR, App Router, RxJS, Tailwind, HTML, CSS, Angular Signals, Server Components, React Native, Expo, AngularJS, SCSS, LESS, styled-components, CSS Modules, Web Components
+- State and data: NgRx Signals, TanStack Query, GraphQL, REST, Zod, NGXS, NgRx, Elf, Zustand, Redux, Apollo, React Hook Form, OpenAPI, WebSocket, AWS Amplify subscriptions
+- UI and design systems: design tokens, accessibility, WCAG AA, Figma to code, Storybook, PrimeNG, Angular Material, Radix, Mantine, shadcn/ui, Style Dictionary, Atomic Design, Tiptap, AG Grid, Cytoscape.js, ECharts, Highcharts, Recharts, visx, GridStack, i18n, Transloco
+- Backend: Node.js, PostgreSQL, SQL, Drizzle, Telegram bots, queues in Postgres, NestJS, Express, Payload CMS, Supabase, Neon, Upstash Redis, Spring Boot, Symfony, Laravel
+  Node and Postgres in production: only in my own products. At employers my backend work was Spring Boot and PHP.
+- Architecture: Nx monorepo, Module Federation, micro-frontends, Turborepo, multi-tenancy, roles and permissions, feature flags, large version migrations
+- Testing: Vitest, Playwright, Cypress, Jest, Jasmine, React Testing Library, MSW, unit, integration, E2E, visual regression
+- Tooling: Claude Code, Git, Vercel, CI/CD: GitHub Actions, GitLab CI, CircleCI, Docker, Vite, Webpack, Sentry, PostHog, Keycloak, OIDC
+
+## How I work with AI agents
+
+ChatGPT in my daily work since 2022, Cursor at Lumigo, Claude Code now. I write the spec and a failing test first. One agent writes the code, a second one reviews it and cannot change files.
+
+- Spec before any behaviour change: the edit is blocked while the spec has open questions
+- Separate agents write, review and verify: diagnosis runs on a stronger model
+- Automatic guards: no secrets in commits, lint must pass, the turn cannot end while tests are red
+- Every guard is tested: with one case it must allow and one it must block
+
+## Outside of code
+
+I record, mix and master bands from Warsaw's DIY hardcore-punk scene at big-s-studio. I also write my own audio analysis tools in Python.
+Trained as a quantum electronics engineer: BSc, BSUIR (Minsk), 2018 · English: full professional · Russian: native · Polish: A2

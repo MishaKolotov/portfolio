@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mikhail Kolatau · Senior Full-Stack AI Engineer · TypeScript, React, Angular, Node.js</title>
+<meta name="description" content="Senior frontend and full-stack engineer, Warsaw. Angular since 2016, React and Next.js, Node.js. Lately AI: Lumigo's LLM UI, OpenAI's AI Lab. Remote in Europe.">
+<meta property="og:title" content="Mikhail Kolatau · Senior Full-Stack AI Engineer · TypeScript, React, Angular, Node.js">
+<meta property="og:description" content="Senior frontend and full-stack engineer, Warsaw. Angular since 2016, React and Next.js, Node.js. Lately AI: Lumigo's LLM UI, OpenAI's AI Lab. Remote in Europe.">
+<meta property="og:type" content="profile">
+<meta property="og:image" content="og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#101827; --ink2:rgba(16,24,39,.8); --ink3:rgba(16,24,39,.55);
+  --glass:rgba(255,255,255,.62); --glassEdge:rgba(255,255,255,.6); --sep:rgba(16,24,39,.08);
+  --accent1:#2B7F5E; --accent2:#1F6349; --focus:#174C38;
+  --ease-out:cubic-bezier(.23,1,.32,1);
+}
+*{box-sizing:border-box;margin:0}
+body{color:var(--ink);font:400 17px/1.5 Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;
+  background:#DCE8E0}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+
+/* sky: one fixed layer for the whole page, clouds drawn by an SVG noise filter */
+.sky{position:fixed;inset:0;z-index:0;pointer-events:none;width:100%;height:100%;
+  background:linear-gradient(180deg,#B4D2E2 0%,#CBDEE3 28%,#DCE8E0 52%,#E6EDDD 74%,#F1EFE2 100%)}
+.sky svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.sun{position:fixed;z-index:0;pointer-events:none;left:50%;top:58%;width:900px;height:900px;transform:translate(-50%,-50%);
+  background:radial-gradient(closest-side,rgba(255,252,236,.7),rgba(244,246,226,.3) 45%,transparent 72%)}
+.wrap{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* floating pill nav */
+.navwrap{position:sticky;top:14px;z-index:10;display:flex;justify-content:center;padding-top:14px}
+nav{display:flex;align-items:center;gap:6px;padding:6px 6px 6px 18px;border-radius:18px;font-size:15px;
+  background:var(--glass);border:1px solid var(--glassEdge);
+  backdrop-filter:blur(14px) saturate(1.8);-webkit-backdrop-filter:blur(14px) saturate(1.8);
+  box-shadow:0 10px 28px -12px rgba(31,38,80,.3),inset 0 1px 0 rgba(255,255,255,.95)}
+nav .name{font-weight:600;margin-right:14px;white-space:nowrap;padding:10px 0}
+nav a.l{padding:10px 12px;color:var(--ink2);white-space:nowrap}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 20px;border-radius:14px;font:600 15px/1 Manrope;white-space:nowrap;transition:transform 140ms var(--ease-out)}
+.btn:active{transform:scale(.97)}
+.btn.primary{color:#fff;background:linear-gradient(180deg,var(--accent1),var(--accent2));
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.4),0 6px 16px rgba(42,122,91,.3)}
+.btn.glass{background:var(--glass);border:1px solid var(--glassEdge);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 4px 12px -6px rgba(31,38,80,.25)}
+.btn.sm{height:40px;padding:0 16px;font-size:15px;border-radius:12px}
+
+/* hero, centred */
+header{padding:72px 0 0;text-align:center;position:relative}
+header::before{content:"";position:absolute;left:50%;top:40px;width:min(980px,100%);height:600px;transform:translateX(-50%);z-index:-1;pointer-events:none;background:radial-gradient(closest-side,rgba(255,255,255,.62),rgba(255,255,255,.3) 55%,transparent 100%)}
+.open{display:inline-flex;align-items:center;gap:8px;font:500 13px/1 Manrope;padding:9px 14px;border-radius:999px;background:var(--glass);border:1px solid var(--glassEdge);box-shadow:inset 0 1px 0 rgba(255,255,255,.9)}
+.open i{width:8px;height:8px;border-radius:50%;background:#2FB574}
+.eyebrow{font:600 15px/22px Manrope;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);margin-top:22px}
+.eyebrow span::before{content:"· "}
+h1 span{display:block}
+h1{font-weight:500;font-size:clamp(36px,5.6vw,72px);line-height:1.05;letter-spacing:-.035em;margin:14px auto 18px;max-width:20ch;text-wrap:balance}
+.lead{font-size:clamp(17px,1.5vw,20px);line-height:1.5;color:var(--ink2);max-width:52ch;margin:0 auto}
+.cta{display:flex;gap:12px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+.terms{margin-top:14px;font-size:15px;line-height:22px;color:var(--ink2);text-wrap:balance}
+
+/* glass panel under the hero */
+.stage{position:relative;margin:56px auto 0;max-width:980px}
+.note{position:absolute;left:-6px;top:-40px;font:500 22px/1 Caveat,cursive;color:var(--focus);transform:rotate(-4deg);display:flex;align-items:flex-start;gap:4px}
+.note svg{margin-top:6px;flex:none}
+.panel{display:grid;grid-template-columns:340px minmax(0,1fr);gap:0;border-radius:26px;overflow:hidden;text-align:left;
+  background:var(--glass);border:1px solid var(--glassEdge);
+  backdrop-filter:blur(14px) saturate(1.8);-webkit-backdrop-filter:blur(14px) saturate(1.8);
+  box-shadow:0 24px 60px -24px rgba(31,38,80,.38),0 2px 6px -2px rgba(31,38,80,.16),inset 0 1px 0 rgba(255,255,255,.95)}
+.ph{position:relative;min-height:330px}
+.panel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 56%;display:block}
+.facts{padding:10px 26px}
+.fact{display:grid;grid-template-columns:216px minmax(0,1fr);gap:16px;align-items:center;padding:20px 0}
+.fact+.fact{border-top:1px solid var(--sep)}
+.fact .k{font:500 22px/26px Manrope;letter-spacing:-.02em}
+.fact .v{font-size:15px;line-height:21px;color:var(--ink2)}
+.jump{display:none}
+.logos{margin:44px auto 0;display:flex;gap:10px 30px;justify-content:center;flex-wrap:wrap;font:500 15px/1.4 Manrope;color:var(--ink2);padding-bottom:80px}
+.logos small{flex-basis:100%;text-align:center;font:400 13px/1 Manrope;color:var(--ink2);margin-bottom:6px}
+
+@media (max-width:760px){
+  header{padding-top:40px}
+  .eyebrow span{display:block}.eyebrow span::before{content:none}
+  .card,.panel{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(255,255,255,.82)}
+  .body>p{text-align:left}
+  details.block>summary{padding:18px 20px}
+  .reach a,.logos a,.links a{padding:14px 0}
+  .jump a{padding:14px 0;min-height:44px;display:inline-flex;align-items:center}
+  .lead br{display:none}.lead{text-wrap:pretty}
+  section{scroll-margin-top:24px}
+  .ph{aspect-ratio:16/9}
+  .panel{grid-template-columns:1fr}
+  .ph{min-height:0;aspect-ratio:4/3}
+  .fact{grid-template-columns:1fr;gap:4px;padding:14px 0}
+  .note{display:none}
+  .stage{margin-top:36px}
+}
+@media (prefers-reduced-transparency:reduce){nav,.panel,.card,.btn.glass,.btn.ghost,.open{background:#fff;backdrop-filter:none;-webkit-backdrop-filter:none}}
+@media (min-width:761px) and (max-width:1000px){.panel{grid-template-columns:280px minmax(0,1fr)}.fact{grid-template-columns:1fr;gap:4px;padding:14px 0}}
+@media (max-width:860px){nav a.l{display:none}.jump{display:flex;gap:4px 22px;justify-content:center;flex-wrap:wrap;margin-top:28px;font:500 15px/1 Manrope}.jump a{padding:12px 0}}
+
+/* ---------- sections on the sky ---------- */
+html{scroll-behavior:smooth}
+ul{list-style:none;padding:0}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.skip{position:absolute;left:-9999px}.skip:focus{left:16px;top:16px;z-index:20;background:var(--ink);color:#fff;padding:12px 16px;border-radius:12px}
+h2,.ch{font:500 clamp(28px,3.4vw,44px)/1.1 Manrope;letter-spacing:-.03em;text-wrap:balance}
+h3{font:600 17px/24px Manrope;letter-spacing:-.01em;text-wrap:balance}
+h3.pt{font:500 22px/28px Manrope;letter-spacing:-.02em}
+.sub h3{font-weight:500}
+p{max-width:64ch}
+.small{font-size:13px;line-height:18px;color:var(--ink2)}
+.muted{color:var(--ink2)}
+.btn.solid{color:#fff;background:linear-gradient(180deg,var(--accent1),var(--accent2));box-shadow:inset 0 1.5px 0 rgba(255,255,255,.4),0 6px 16px rgba(42,122,91,.3)}
+.btn.ghost{background:var(--glass);border:1px solid var(--glassEdge);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 4px 12px -6px rgba(31,38,80,.25)}
+a.x{background:linear-gradient(var(--accent2),var(--accent2)) no-repeat 0 100%/100% 2px;padding-bottom:2px;transition:background-size 160ms var(--ease-out)}
+a.x::after{content:"\00a0↗" / "";font-size:.8em;color:var(--ink2)}
+a.u{border-bottom:1px solid var(--ink3);padding-bottom:1px}
+@media (hover:hover) and (pointer:fine){a.x:hover{background-size:100% 4px}a.u:hover{border-color:var(--ink)}.btn.ghost:hover,.btn.glass:hover{background:rgba(255,255,255,.8)}.btn.solid:hover,.btn.primary:hover{filter:brightness(1.05)}nav a.l:hover{color:var(--ink)}}
+
+section{padding:104px 0 0}
+.label{text-align:center;margin:0 auto 36px;max-width:720px}
+.label small{display:block;font:400 17px/1.5 Manrope;color:var(--ink2);margin-top:12px;text-wrap:balance}
+.body{display:grid;gap:18px;max-width:900px;margin:0 auto}
+.body>p{margin:0 auto;text-align:center;color:var(--ink2);max-width:60ch}
+.body>h3{text-align:center;margin-top:14px}
+.body>ul.pts{max-width:720px;margin:0 auto}
+
+.card{background:var(--glass);border:1px solid var(--glassEdge);border-radius:26px;
+  backdrop-filter:blur(14px) saturate(1.8);-webkit-backdrop-filter:blur(14px) saturate(1.8);
+  box-shadow:0 18px 44px -22px rgba(31,38,80,.34),0 2px 6px -2px rgba(31,38,80,.12),inset 0 1px 0 rgba(255,255,255,.95)}
+section>.card{max-width:900px;margin:0 auto}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 13px/1 Manrope;padding:7px 10px;border-radius:999px;background:rgba(16,24,39,.06);color:var(--ink2);white-space:nowrap}
+
+.job{padding:28px;display:grid;gap:12px}
+.job header{display:flex;justify-content:space-between;gap:8px 16px;align-items:baseline;flex-wrap:wrap;padding:0;text-align:left;position:static}
+.job header::before{display:none}
+.job header span{font-size:13px;color:var(--ink2)}
+.ctx{font-size:15px;line-height:22px;color:var(--ink2)}
+.pts li{position:relative;padding-left:16px;font-size:15px;line-height:22px;margin-top:8px;max-width:68ch}
+.pts li::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--accent2)}
+.pts b{font-weight:600}
+ul.job{gap:0}
+.sub{padding-top:16px;border-top:1px solid var(--sep);display:grid;gap:10px}
+details>summary{cursor:pointer;font:600 15px/1 Manrope;list-style:none;display:inline-flex;align-items:center;gap:6px;padding:12px 0}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"+" / "";display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:rgba(16,24,39,.07);font-weight:500}
+details[open]>summary::before{content:"−" / ""}
+details.block>summary{padding:22px 28px;display:flex;line-height:1.35;align-items:flex-start}
+article.job,details,#book{scroll-margin-top:100px}
+section{scroll-margin-top:0}
+.nudge{display:flex;gap:10px 20px;align-items:center;justify-content:center;flex-wrap:wrap;padding:18px 26px;font-size:15px}
+
+.proj{padding:28px;display:grid;gap:14px}
+.proj header{display:flex;justify-content:space-between;gap:8px 12px;align-items:baseline;flex-wrap:wrap;padding:0;text-align:left;position:static}
+.proj header::before{display:none}
+.proj>p{font-size:15px;line-height:22px;color:var(--ink2)}
+.nums{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--sep);border-bottom:1px solid var(--sep)}
+.nums>div{padding:14px 16px 14px 0}
+.nums>div+div{padding-left:16px;border-left:1px solid var(--sep)}
+.big{font:500 26px/30px Manrope;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.cap{font-size:13px;line-height:18px;color:var(--ink2);margin-top:6px;text-wrap:balance}
+.story{font-size:15px;line-height:22px;max-width:68ch}.story b{font-weight:600}
+.status{font:500 13px/1 Manrope;padding:6px 10px;border-radius:999px;border:1px solid rgba(16,24,39,.16);color:var(--ink2);white-space:nowrap;background:rgba(255,255,255,.5)}
+.links{display:flex;gap:6px 20px;flex-wrap:wrap;font:600 15px/1 Manrope}
+.links a{padding:10px 0}
+.frame{padding:6px 28px}
+.row{display:flex;align-items:center;gap:6px 14px;min-height:60px;padding:10px 0}
+.row+.row{border-top:1px solid var(--sep)}
+.row .t{flex:1;min-width:0}
+.row .t b{display:block;font-weight:500;font-size:17px;line-height:24px}
+.row .t i{display:block;font-style:normal;font-size:13px;line-height:18px;color:var(--ink2)}
+.row .r{font-size:13px;color:var(--ink2);white-space:nowrap;flex:none}
+.row a.x{background:none;border-bottom:1px solid var(--ink3);padding-bottom:1px}.row a.x::after{content:none}
+.dot{width:28px;height:28px;border-radius:50%;background:rgba(16,24,39,.07);display:grid;place-items:center;font-size:13px;flex:none}
+.skill{display:grid;grid-template-columns:170px minmax(0,1fr);gap:16px;padding:16px 0}
+.skill+.skill{border-top:1px solid var(--sep)}
+.skill h3{font-size:15px;line-height:27px}
+.contact{padding:44px 36px;display:grid;gap:18px;justify-items:center;text-align:center;max-width:760px!important}
+.contact .cta{margin:0}
+.contact .links{justify-content:center}
+.mail{font:500 22px/1.3 Manrope;letter-spacing:-.01em;overflow-wrap:anywhere;display:inline-block;width:fit-content}
+.reach{display:flex;gap:6px 20px;flex-wrap:wrap;justify-content:center;margin-top:16px;font:500 15px/1.6 Manrope}
+.reach a{padding:8px 0}
+header p{margin-left:auto;margin-right:auto}
+.logos a{padding:8px 0}
+.logos{padding-bottom:0}
+footer{margin-top:96px;padding:28px 0 56px;font-size:13px;color:var(--ink2);display:flex;justify-content:space-between;gap:8px 24px;flex-wrap:wrap;border-top:1px solid var(--sep)}
+@media (max-width:760px){
+  section{padding-top:72px}
+  .job,.proj{padding:20px}
+  .frame,  .nums{grid-template-columns:1fr}
+  .nums>div+div{border-left:0;border-top:1px solid var(--sep);padding-left:0}
+  .skill{grid-template-columns:1fr;gap:6px}
+  .row{flex-wrap:wrap}.row .r{flex-basis:100%;margin-top:-4px}
+      .contact{padding:28px 20px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,a.x{transition:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sky" aria-hidden="true">
+<svg preserveAspectRatio="xMidYMid slice" viewBox="0 0 1440 900">
+  <defs>
+    <filter id="cl" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.0034 0.0085" numOctaves="5" seed="11" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 .80  0 0 0 0 .88  0 0 0 0 .84  3.4 0 0 0 -1.52" result="pink"/>
+      <feGaussianBlur in="pink" stdDeviation="5" result="pinkb"/>
+      <feOffset in="pinkb" dy="16" result="under"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 .98  3.6 0 0 0 -1.78" result="white"/>
+      <feGaussianBlur in="white" stdDeviation="3" result="whiteb"/>
+      <feMerge><feMergeNode in="under"/><feMergeNode in="whiteb"/></feMerge>
+    </filter>
+    <filter id="wisp" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.009 0.03" numOctaves="4" seed="4"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  2.4 0 0 0 -1.32"/>
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".45" stop-color="#fff" stop-opacity=".75"/><stop offset="1" stop-color="#fff" stop-opacity="1"/>
+    </linearGradient>
+    <mask id="m"><rect width="1440" height="900" fill="url(#fade)"/></mask>
+  </defs>
+  <g mask="url(#m)">
+    <rect width="1440" height="900" filter="url(#wisp)" opacity=".55"/>
+    <rect width="1440" height="900" filter="url(#cl)"/>
+  </g>
+</svg>
+</div>
+<div class="sun" aria-hidden="true"></div>
+<div class="navwrap"><nav aria-label="Sections">
+  <a class="name" href="#main">Mikhail Kolatau</a>
+  <a class="l" href="#experience">Experience</a><a class="l" href="#projects">Projects</a><a class="l" href="#stack">Stack</a><a class="l" href="#contact">Contact</a>
+  <a class="btn primary sm" href="https://calendar.app.google/jp7854e7MJPsHjSCA" target="_blank" rel="noopener">Book a call<span class="vh"> (opens in new tab)</span></a>
+</nav></div>
+
+<main class="wrap" id="main">
+  <header>
+    <div class="open"><i></i>Open to a new role · can start in two weeks</div>
+    <div class="eyebrow">Senior Full-Stack AI Engineer <span>TypeScript, React, Angular, Node.js</span></div>
+    <h1>I build AI products. <span>And I test the models behind them.</span></h1>
+    <p class="lead">Ten years building web products in TypeScript.<br> Since 2025, AI work too: Lumigo, OpenAI's AI Lab on contract, and my own LLM job-search bot in production.</p>
+    <p class="terms">Warsaw (CET) · EU work-authorised · remote in Europe · B2B through my own company · English: full professional</p>
+    <div class="cta">
+      <a class="btn primary" href="https://calendar.app.google/jp7854e7MJPsHjSCA" target="_blank" rel="noopener">Book a 20-minute call<span class="vh"> (opens in new tab)</span></a>
+      <a class="btn glass" href="#cv">Download CV (PDF)</a>
+    </div>
+    <div class="reach">
+      <a class="u" href="mailto:mishakolotov1@gmail.com">mishakolotov1@gmail.com</a>
+      <a class="u" href="https://t.me/gigamike666" target="_blank" rel="noopener">Telegram<span class="vh"> (opens in new tab)</span></a>
+      <a class="u" href="https://linkedin.com/in/mikhail-kolatau" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in new tab)</span></a>
+      <a class="u" href="https://github.com/MishaKolotov" target="_blank" rel="noopener">GitHub<span class="vh"> (opens in new tab)</span></a>
+    </div>
+
+    <div class="jump"><a class="u" href="#experience">Experience</a><a class="u" href="#projects">Projects</a><a class="u" href="#stack">Stack</a><a class="u" href="#contact">Contact</a></div>
+
+    <div class="stage">
+      <div class="note" aria-hidden="true">that's me and my dog<svg viewBox="0 0 56 44" width="56" height="44"><path d="M4 4 C 30 2, 46 14, 44 38 M36 30 L44 39 L51 29" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="panel">
+        <div class="ph"><img src="photo3.webp" alt="Mikhail Kolatau on a balcony at sunset, holding a small black and white dog"></div>
+        <div class="facts">
+          <div class="fact"><div class="k">OpenAI AI Lab</div><div class="v">Aug → Oct 2026. I wrote software-engineering evaluation tasks for OpenAI's models. Promoted to reviewer a week in.</div></div>
+          <div class="fact"><div class="k">5 LLM providers</div><div class="v">in the trace and evaluation UI I owned at Lumigo: OpenAI, Anthropic, Bedrock, Gemini, Vertex</div></div>
+          <div class="fact"><div class="k">My own LLM bot</div><div class="v">in production since June 2026. Its scoring is measured on 80 labelled real postings.</div></div>
+          <div class="fact"><div class="k">10 years</div><div class="v">of commercial TypeScript, frontend and full-stack. Angular since 2016, React at ICE, Kaseya and Pynea.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="logos"><small>Worked with</small><a class="u" href="#digis">OpenAI AI Lab (via Digis)</a><a class="u" href="#digis">Oreamnos</a><a class="u" href="#lumigo">Lumigo</a><a class="u" href="#kaseya">Kaseya</a><a class="u" href="#ice">ICE Mortgage Technology</a><a class="u" href="#pynea">Pynea</a></div>
+  </header>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="label"><h2>Experience</h2><small>2016 → now</small></div>
+    <div class="body">
+
+      <article class="card job" id="digis">
+        <header><h3>Contract work through Digis</h3><span>Feb 2026 → now · Digis is a contracting agency</span></header>
+
+        <div class="sub" style="border-top:0;padding-top:0">
+          <header><h3><a class="x" href="https://openai.com" target="_blank" rel="noopener">OpenAI AI Lab<span class="vh"> (opens in new tab)</span></a> · AI Evaluation Expert and Domain Reviewer</h3><span>Aug → Oct 2026 · alongside Oreamnos</span></header>
+          <p class="ctx">I wrote hard software research tasks, ran the model on them and graded its answers against a rubric.</p>
+          <ul class="pts" role="list">
+            <li>Three tasks delivered. Each came with a <b>rubric of 60 to 97 items</b>, every item backed by a source.</li>
+            <li><b>Promoted to reviewer of other experts' tasks a week in.</b> Five submissions reviewed.</li>
+          </ul>
+          <details><summary>More<span class="vh"> about the OpenAI AI Lab work</span></summary><ul class="pts" role="list">
+            <li>I ran the model on every task to find where it really failed, and wrote up each failure with the source that disproves it.</li>
+            <li>Built tooling for the work: five Claude Code skills and a rubric linter that runs on every edit.</li>
+          </ul></details>
+          <div class="chips"><span class="chip">LLM evals</span><span class="chip">rubric design</span><span class="chip">Claude Code</span></div>
+        </div>
+
+        <div class="sub">
+          <header><h3><a class="x" href="https://oreamnos.de" target="_blank" rel="noopener">Oreamnos<span class="vh"> (opens in new tab)</span></a> · Senior Full-Stack Engineer</h3><span>Feb 2026 → now</span></header>
+          <p class="ctx">Four Angular products and a Spring Boot service for German compliance teams.</p>
+          <ul class="pts" role="list">
+            <li><b>Main frontend author of two products</b>: document management and a whistleblowing platform.</li>
+            <li>Wrote the Playwright E2E suite, <b>169 tests in 31 files</b>.</li>
+          </ul>
+          <details><summary>More<span class="vh"> about the Oreamnos work</span></summary><ul class="pts" role="list">
+            <li>Put a Tiptap rich-text editor (React 19) inside the Angular app, with support for collaborative editing. Built a reporting library with drag-and-drop dashboards on GridStack and ECharts.</li>
+            <li>E-invoice validation product, merged to staging. I built the Angular 21 frontend on my own layer of 31 components, plus part of the Spring Boot backend (multi-tenancy, sign-up with email verification, rate limiting).</li>
+            <li>Second-largest contributor to the shared design system of 80 components, used by three product apps. Led its upgrade from Angular 20 to 21 in a day.</li>
+          </ul></details>
+          <div class="chips"><span class="chip">Angular 21</span><span class="chip">Nx</span><span class="chip">NgRx Signals</span><span class="chip">PrimeNG</span><span class="chip">Tailwind 4</span><span class="chip">Tiptap</span><span class="chip">Playwright</span><span class="chip">Spring Boot</span><span class="chip">Keycloak</span><span class="chip">WCAG AA</span></div>
+        </div>
+      </article>
+
+      <article class="card job" id="pynea">
+        <header><h3><a class="x" href="https://pynea.com" target="_blank" rel="noopener">Pynea<span class="vh"> (opens in new tab)</span></a> · Senior Software Engineer</h3><span>Feb → Apr 2026 · fixed-scope contract, alongside Oreamnos</span></header>
+        <p class="ctx">Enterprise HR software, London-based. Next.js 15 and TypeScript, a monorepo of 17 packages.</p>
+        <ul class="pts" role="list">
+          <li>Led the redesign of the Settings area, 8+ screens, from Figma to production.</li>
+          <li>Built interview scheduling on GraphQL, plus roles and permissions for the multi-tenant product.</li>
+        </ul>
+        <details><summary>More<span class="vh"> about Pynea</span></summary><ul class="pts" role="list">
+          <li>Fixed keyboard focus in the shared dialog system: a focus trap that blocked inputs, and focus handling in nested drawers and dialogs.</li>
+        </ul></details>
+        <div class="chips"><span class="chip">Next.js 15</span><span class="chip">React 18</span><span class="chip">GraphQL / Apollo</span><span class="chip">Zustand</span><span class="chip">Radix</span><span class="chip">Storybook</span><span class="chip">Turborepo</span></div>
+      </article>
+
+      <article class="card job" id="lumigo">
+        <header><h3><a class="x" href="https://lumigo.io" target="_blank" rel="noopener">Lumigo<span class="vh"> (opens in new tab)</span></a> · Senior Software Developer</h3><span>Feb → Nov 2025 · ended when the company was acquired</span></header>
+        <p class="ctx">Monitoring for cloud and LLM apps. A frontend monorepo of 100+ packages.</p>
+        <ul class="pts" role="list">
+          <li><b>Main author of the AI / LLM part of the product UI.</b></li>
+          <li>Shipped the LLM evaluation screens and <b>wrote, on my own, the module that aggregates their scores</b>.</li>
+          <li>Built the LLM trace view for <b>five providers</b>, with token cost per call and OpenTelemetry spans.</li>
+        </ul>
+        <details><summary>More<span class="vh"> about Lumigo</span></summary><ul class="pts" role="list">
+          <li>The five providers: OpenAI, Anthropic, Amazon Bedrock, Gemini, Vertex.</li>
+          <li>Second most active contributor to the frontend over the period.</li>
+          <li>Main author of Logs Live Tail, real-time log streaming over GraphQL subscriptions. Built the LLM traces table on AG Grid with server-side loading.</li>
+          <li>Ran releases every two weeks and live customer demos, mentored engineers, led code reviews.</li>
+        </ul></details>
+        <div class="chips"><span class="chip">Angular 19</span><span class="chip">Nx</span><span class="chip">RxJS</span><span class="chip">AG Grid</span><span class="chip">Cytoscape.js</span><span class="chip">Highcharts</span><span class="chip">Cypress</span><span class="chip">feature flags</span></div>
+      </article>
+
+      <article class="card job" id="kaseya">
+        <header><h3><a class="x" href="https://www.kaseya.com" target="_blank" rel="noopener">Kaseya<span class="vh"> (opens in new tab)</span></a> (<a class="x" href="https://www.pulseway.com" target="_blank" rel="noopener">Pulseway<span class="vh"> (opens in new tab)</span></a>) · Software Development Engineer</h3><span>Aug 2021 → Feb 2025</span></header>
+        <p class="ctx">Remote monitoring software for IT teams. Led the team and ran hiring interviews.</p>
+        <ul class="pts" role="list">
+          <li>Moved the app from <b>Angular 12 to 18</b>: build time 272 s → 99 s, known vulnerabilities 65 → 3.</li>
+          <li>Built the Security page (two-factor enforcement, IP allow-list) and the shared search and filter bar.</li>
+        </ul>
+        <details><summary>More<span class="vh"> about Kaseya</span></summary><ul class="pts" role="list">
+          <li>Moved 30% of components from legacy LESS to Tailwind and added React modules to the Angular app through Module Federation.</li>
+          <li>White-label build on a feature branch: the brand name became a setting across the app's views and code, 2,170 unused files removed.</li>
+        </ul></details>
+        <div class="chips"><span class="chip">Angular</span><span class="chip">AngularJS</span><span class="chip">NGXS</span><span class="chip">NgRx</span><span class="chip">Module Federation</span><span class="chip">React widgets</span><span class="chip">Tailwind</span></div>
+      </article>
+
+      <article class="card job" id="ice">
+        <header><h3><a class="x" href="https://www.icemortgagetechnology.com" target="_blank" rel="noopener">ICE Mortgage Technology<span class="vh"> (opens in new tab)</span></a> · Senior Software Development Engineer</h3><span>Mar 2020 → Aug 2021</span></header>
+        <p class="ctx">A large US mortgage platform, part of Intercontinental Exchange. Angular with React modules inside.</p>
+        <ul class="pts" role="list">
+          <li>Designed the layer that lets the Angular and React parts of the product talk to each other.</li>
+          <li>Cut page load time from about 4.5 s to 2.7 s.</li>
+        </ul>
+        <div class="chips"><span class="chip">Angular</span><span class="chip">React</span><span class="chip">Redux</span><span class="chip">micro-frontends</span><span class="chip">Jest</span><span class="chip">GitLab CI</span></div>
+      </article>
+
+      <details class="card block" id="earlier">
+        <summary>Earlier: Strateg Group, Full-Stack Developer (Angular 2+, PHP), 2016–2020</summary>
+        <div class="job" style="padding-top:0">
+          <p class="ctx">A start-up in Minsk. I chose Angular 2+ as the main framework, built the backend on Symfony and Laravel, and took features from requirements to release.</p>
+          <div class="chips"><span class="chip">Angular 2+</span><span class="chip">Symfony</span><span class="chip">Laravel</span></div>
+        </div>
+      </details>
+
+      <div class="card nudge"><a class="btn primary" href="https://calendar.app.google/jp7854e7MJPsHjSCA" target="_blank" rel="noopener">Book a 20-minute call<span class="vh"> (opens in new tab)</span></a><a class="u" href="mailto:mishakolotov1@gmail.com">mishakolotov1@gmail.com</a></div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="label"><h2>Projects</h2><small>My own projects. The specs, decisions and measurements are mine. Claude Code, an AI coding agent, writes most of the code.</small></div>
+    <div class="body">
+
+      <article class="card proj">
+        <header><h3 class="pt"><a class="x" href="https://github.com/MishaKolotov/llm-job-triage" target="_blank" rel="noopener">GigaWork<span class="vh"> (opens in new tab)</span></a></h3><span class="status">in production since June 2026</span></header>
+        <p>A Telegram bot that finds jobs for me. It pulls postings from 18 sources, drops the wrong ones with simple rules before any model call, and has a model score the rest.</p>
+        <div class="nums">
+          <div><div class="big">37,702</div><div class="cap">postings collected by October 2026</div></div>
+          <div><div class="big">47 of 60</div><div class="cap">good postings (ones I applied to or the bot sent me) pass the scorer I shipped. The old one, re-run, passes 35.</div></div>
+        </div>
+        <p class="story"><b>One thing I caught by measuring.</b> The bot was paying a model to score postings that had nothing to do with my work, nurses and lawyers among them: 1,365 of 4,845 paid scores in three weeks came out near zero. I added a free check on the job title that runs before any paid call.</p>
+        <details><summary>More<span class="vh"> about GigaWork</span></summary><ul class="pts" role="list">
+          <li>I test scoring on 80 real postings labelled by outcome. After a model change I re-ran them: scores fell about 8 points and the live threshold of 60 still held.</li>
+          <li>Posting text reaches the model wrapped as data, as a defence against prompt injection. The agents that read it get only allow-listed tools.</li>
+          <li>The job queue is plain Postgres. Workers take rows with an atomic claim, with no separate queue service.</li>
+          <li>It also built CVs and cover letters on demand from a structured record of my whole career, with the facts pinned so nothing got invented.</li>
+          <li>If one model provider fails, the next one takes over. A failed provider is parked for its retry window (a circuit breaker).</li>
+          <li>11 LLM-judge agents check each generated CV, and two can block it. The judges are not yet checked against human labels.</li>
+          <li>An e-mail application goes out only after I press Send, and never twice.</li>
+          <li>I measured the Batch API at 2.3 times the price of cached calls ($0.0047 against $0.0020 per posting), so I dropped it before launch.</li>
+        </ul></details>
+        <div class="chips"><span class="chip">TypeScript</span><span class="chip">Next.js</span><span class="chip">Node.js</span><span class="chip">Postgres (Neon)</span><span class="chip">SQL</span><span class="chip">Drizzle</span><span class="chip">Claude</span><span class="chip">Gemini</span><span class="chip">Zod</span><span class="chip">Vitest</span></div>
+        <div class="links"><a class="u" href="https://github.com/MishaKolotov/llm-job-triage" target="_blank" rel="noopener">Scoring code on GitHub <span aria-hidden="true">↗</span><span class="vh"> (opens in new tab)</span></a></div>
+      </article>
+
+      <article class="card proj">
+        <header><h3 class="pt"><a class="x" href="https://automix-delta.vercel.app" target="_blank" rel="noopener">GigaMixer<span class="vh"> (opens in new tab)</span></a></h3><span class="status">live</span></header>
+        <p>Mixing a multitrack recording in the browser. You type what is wrong ("the vocal is buried") and a model turns it into a checked list of changes.</p>
+        <ul class="pts" role="list">
+          <li>A cheap model answers first. If the answer fails validation or the call fails, it retries once on a stronger model.</li>
+          <li>Guardrails live in code, not in the prompt: the server clamps every change the model proposes to an allowed range.</li>
+        </ul>
+        <details><summary>More<span class="vh"> about GigaMixer</span></summary><ul class="pts" role="list">
+          <li>A test set of 150 labelled phrases with pass thresholds, including attempts to trick the model.</li>
+          <li>A Python worker separates instruments from a recording with local models.</li>
+        </ul></details>
+        <div class="chips"><span class="chip">Next.js</span><span class="chip">Anthropic SDK</span><span class="chip">tool calling</span><span class="chip">shadcn/ui</span><span class="chip">Demucs</span><span class="chip">Supabase</span><span class="chip">Cloudflare R2</span></div>
+        <div class="links"><a class="u" href="https://automix-delta.vercel.app" target="_blank" rel="noopener">Open the app <span aria-hidden="true">↗</span><span class="vh"> (opens in new tab)</span></a></div>
+      </article>
+
+      <article class="card proj">
+        <header><h3 class="pt"><a class="x" href="https://gigamike666.com" target="_blank" rel="noopener">big-s-studio<span class="vh"> (opens in new tab)</span></a></h3><span class="status">live</span></header>
+        <p>The site of my recording studio. Artists leave comments right on the audio waveform, and I update the site from a Telegram bot. It has its own design system.</p>
+        <ul class="pts" role="list">
+          <li>63 design tokens (colours, fonts, spacing) from one JSON source, generated as code for web, iOS, Android and Windows.</li>
+          <li>The build fails if text contrast drops below WCAG AA, the accessibility standard.</li>
+        </ul>
+        <div class="chips"><span class="chip">Next.js 16</span><span class="chip">React 19</span><span class="chip">Server Components</span><span class="chip">Web Audio API</span><span class="chip">design tokens</span><span class="chip">Drizzle</span></div>
+        <div class="links"><a class="u" href="https://gigamike666.com" target="_blank" rel="noopener">Open the site <span aria-hidden="true">↗</span><span class="vh"> (opens in new tab)</span></a></div>
+      </article>
+
+      <article class="card proj">
+        <header><h3 class="pt"><a class="x" href="https://github.com/MishaKolotov/bandcamp-daily" target="_blank" rel="noopener">bandcamp-daily<span class="vh"> (opens in new tab)</span></a></h3><span class="status">runs daily</span></header>
+        <p>Picks one new release a day from my Bandcamp collection. A small audio model compares how releases sound, and that raised ranking quality (MRR) from 0.118 to 0.200. I tuned and tested on the same data, so the number is optimistic.</p>
+        <div class="chips"><span class="chip">TypeScript</span><span class="chip">Node.js 20</span><span class="chip">ONNX</span><span class="chip">embeddings</span><span class="chip">GitHub Actions</span></div>
+      </article>
+
+      <h3 class="pt" style="margin-top:12px">More projects</h3>
+      <div class="card frame">
+        <div class="row"><div class="t"><b><a class="x" href="https://bandcogs.vercel.app" target="_blank" rel="noopener">Bandcogs<span class="vh"> (opens in new tab)</span></a></b><i>An app for bands. Next.js, NestJS, React Native with Expo, Supabase.</i></div><div class="r">in progress</div></div>
+        <div class="row"><div class="t"><b><a class="x" href="https://github.com/MishaKolotov/agent-harness" target="_blank" rel="noopener">agent-harness<span class="vh"> (opens in new tab)</span></a></b><i>Safety rules for coding agents. Every rule has a test that proves it blocks what it should.</i></div><div class="r">public repo</div></div>
+        <div class="row"><div class="t"><b><a class="x" href="https://ctaio-jobfit.vercel.app" target="_blank" rel="noopener">ctaio-jobfit<span class="vh"> (opens in new tab)</span></a></b><i>Matches a CV to 406 open postings with one model call.</i></div><div class="r">live demo</div></div>
+        <div class="row"><div class="t"><b><a class="x" href="https://under-the-big-black-sun.vercel.app" target="_blank" rel="noopener">under-big-black-sun<span class="vh"> (opens in new tab)</span></a></b><i>A photo zine in English and Polish. Payload CMS, Next.js 15, Postgres.</i></div><div class="r">live</div></div>
+        <div class="row"><div class="t"><b><a class="x" href="https://github.com/MishaKolotov/bandwidth-check" target="_blank" rel="noopener">SpeakNow<span class="vh"> (opens in new tab)</span></a></b><i>Video recording in the browser that adapts quality to connection speed. Angular 21.</i></div><div class="r">public repo</div></div>
+        <div class="row"><div class="t"><b><a class="x" href="https://github.com/MishaKolotov/manyas-e2e" target="_blank" rel="noopener">Manyas E2E<span class="vh"> (opens in new tab)</span></a></b><i>Playwright tests for a survey in 10 languages on three devices. Client work.</i></div><div class="r">public repo</div></div>
+        <div class="row"><div class="t"><b><a class="x" href="https://github.com/MishaKolotov/mixfeedback" target="_blank" rel="noopener">MixFeedback<span class="vh"> (opens in new tab)</span></a></b><i>Real-time comments on a track. NestJS, Angular 19. A study project.</i></div><div class="r">public repo</div></div>
+        <div class="row"><div class="t"><b>quiz</b><i>My study tool. A model grades spoken answers about code against a rubric.</i></div><div class="r">private repo</div></div>
+        <div class="row"><div class="t"><b>tg-summary-bot</b><i>Summarises long Telegram chats with Gemini. Python.</i></div><div class="r">runs locally</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section id="stack">
+    <div class="label"><h2>Skills and stack</h2><small>Most used first.</small></div>
+    <div class="card" style="padding:8px 28px">
+      <div class="skill"><h3>AI / LLM</h3><div>
+        <div class="chips"><span class="chip">structured outputs</span><span class="chip">tool calling</span><span class="chip">LLM evals</span><span class="chip">Claude API</span><span class="chip">prompt caching</span><span class="chip">LLM observability</span></div>
+        <details><summary>11 more<span class="vh"> AI and LLM skills</span></summary><div class="chips"><span class="chip">LLM-as-judge</span><span class="chip">model routing and fallback</span><span class="chip">cheap model first, stronger one on failure</span><span class="chip">cost and latency tracking</span><span class="chip">prompt-injection defences</span><span class="chip">agents with least privilege</span><span class="chip">browser agents</span><span class="chip">human approval before irreversible steps</span><span class="chip">embeddings, cosine similarity</span><span class="chip">Whisper speech-to-text</span><span class="chip">Gemini</span></div></details>
+      </div></div>
+      <div class="skill"><h3>Frontend</h3><div>
+        <div class="chips"><span class="chip">TypeScript</span><span class="chip">JavaScript</span><span class="chip">Angular 2 → 21</span><span class="chip">React 18–19</span><span class="chip">Next.js 15–16</span><span class="chip">SSR, App Router</span><span class="chip">RxJS</span><span class="chip">Tailwind</span></div>
+        <details><summary>10 more<span class="vh"> frontend skills</span></summary><div class="chips"><span class="chip">HTML, CSS</span><span class="chip">Angular Signals</span><span class="chip">Server Components</span><span class="chip">React Native, Expo</span><span class="chip">AngularJS</span><span class="chip">SCSS</span><span class="chip">LESS</span><span class="chip">styled-components</span><span class="chip">CSS Modules</span><span class="chip">Web Components</span></div></details>
+      </div></div>
+      <div class="skill"><h3>State and data</h3><div>
+        <div class="chips"><span class="chip">NgRx Signals</span><span class="chip">TanStack Query</span><span class="chip">GraphQL</span><span class="chip">REST</span><span class="chip">Zod</span></div>
+        <details><summary>10 more<span class="vh"> state and data skills</span></summary><div class="chips"><span class="chip">NGXS</span><span class="chip">NgRx</span><span class="chip">Elf</span><span class="chip">Zustand</span><span class="chip">Redux</span><span class="chip">Apollo</span><span class="chip">React Hook Form</span><span class="chip">OpenAPI</span><span class="chip">WebSocket</span><span class="chip">AWS Amplify subscriptions</span></div></details>
+      </div></div>
+      <div class="skill"><h3>UI and design systems</h3><div>
+        <div class="chips"><span class="chip">design tokens</span><span class="chip">accessibility, WCAG AA</span><span class="chip">Figma to code</span><span class="chip">Storybook</span><span class="chip">PrimeNG</span></div>
+        <details><summary>15 more<span class="vh"> UI skills</span></summary><div class="chips"><span class="chip">Angular Material</span><span class="chip">Radix</span><span class="chip">Mantine</span><span class="chip">shadcn/ui</span><span class="chip">Style Dictionary</span><span class="chip">Atomic Design</span><span class="chip">Tiptap</span><span class="chip">AG Grid</span><span class="chip">Cytoscape.js</span><span class="chip">ECharts</span><span class="chip">Highcharts</span><span class="chip">Recharts</span><span class="chip">visx</span><span class="chip">GridStack</span><span class="chip">i18n, Transloco</span></div></details>
+      </div></div>
+      <div class="skill"><h3>Backend</h3><div>
+        <div class="chips"><span class="chip">Node.js</span><span class="chip">PostgreSQL, SQL</span><span class="chip">Drizzle</span><span class="chip">Telegram bots</span><span class="chip">queues in Postgres</span></div>
+        <details><summary>9 more<span class="vh"> backend skills</span></summary><div class="chips"><span class="chip">NestJS</span><span class="chip">Express</span><span class="chip">Payload CMS</span><span class="chip">Supabase</span><span class="chip">Neon</span><span class="chip">Upstash Redis</span><span class="chip">Spring Boot</span><span class="chip">Symfony</span><span class="chip">Laravel</span></div></details>
+        <p class="small" style="margin-top:8px">Node and Postgres in production: only in my own products. At employers my backend work was Spring Boot and PHP.</p>
+      </div></div>
+      <div class="skill"><h3>Architecture</h3><div class="chips"><span class="chip">Nx monorepo</span><span class="chip">Module Federation</span><span class="chip">micro-frontends</span><span class="chip">Turborepo</span><span class="chip">multi-tenancy</span><span class="chip">roles and permissions</span><span class="chip">feature flags</span><span class="chip">large version migrations</span></div></div>
+      <div class="skill"><h3>Testing</h3><div class="chips"><span class="chip">Vitest</span><span class="chip">Playwright</span><span class="chip">Cypress</span><span class="chip">Jest</span><span class="chip">Jasmine</span><span class="chip">React Testing Library</span><span class="chip">MSW</span><span class="chip">unit, integration, E2E</span><span class="chip">visual regression</span></div></div>
+      <div class="skill"><h3>Tooling</h3><div class="chips"><span class="chip">Claude Code</span><span class="chip">Git</span><span class="chip">Vercel</span><span class="chip">CI/CD: GitHub Actions, GitLab CI, CircleCI</span><span class="chip">Docker</span><span class="chip">Vite</span><span class="chip">Webpack</span><span class="chip">Sentry</span><span class="chip">PostHog</span><span class="chip">Keycloak, OIDC</span></div></div>
+    </div>
+  </section>
+
+  <!-- HOW I WORK -->
+  <section>
+    <div class="label"><h2>How I work with AI agents</h2><small>The setup is in my repos. I can show it on a call.</small></div>
+    <div class="body">
+      <p>ChatGPT in my daily work since 2022, Cursor at Lumigo, Claude Code now. I write the spec and a failing test first. One agent writes the code, a second one reviews it and cannot change files.</p>
+      <details class="card block rules"><summary>The four rules</summary><div class="frame" style="padding-top:0">
+        <div class="row"><div class="dot" aria-hidden="true">1</div><div class="t"><b>Spec before any behaviour change</b><i>the edit is blocked while the spec has open questions</i></div></div>
+        <div class="row"><div class="dot" aria-hidden="true">2</div><div class="t"><b>Separate agents write, review and verify</b><i>diagnosis runs on a stronger model</i></div></div>
+        <div class="row"><div class="dot" aria-hidden="true">3</div><div class="t"><b>Automatic guards</b><i>no secrets in commits, lint must pass, the turn cannot end while tests are red</i></div></div>
+        <div class="row"><div class="dot" aria-hidden="true">4</div><div class="t"><b>Every guard is tested</b><i>with one case it must allow and one it must block</i></div></div>
+      </div></details>
+    </div>
+  </section>
+
+  <!-- OUTSIDE -->
+  <section>
+    <div class="label"><h2>Outside of code</h2><small>Audio engineer</small></div>
+    <div class="body">
+      <p>I record, mix and master bands from Warsaw's DIY hardcore-punk scene at <a class="x" href="https://gigamike666.com" target="_blank" rel="noopener">big-s-studio<span class="vh"> (opens in new tab)</span></a>. I also write my own audio analysis tools in Python.</p>
+      <p class="small">Trained as a quantum electronics engineer: BSc, BSUIR (Minsk), 2018 · English: full professional · Russian: native · Polish: A2</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="label"><h2>Contact</h2></div>
+    <div class="card contact" id="book">
+      <h3 class="ch">Hiring an AI, full‑stack or frontend engineer? Book a call or write to me.</h3>
+      <p class="muted">I can start two weeks after an offer.</p>
+      <div class="cta" style="margin:0"><a class="btn primary" href="https://calendar.app.google/jp7854e7MJPsHjSCA" target="_blank" rel="noopener">Book a 20-minute call<span class="vh"> (opens in new tab)</span></a></div>
+      <a class="mail u" href="mailto:mishakolotov1@gmail.com">mishakolotov1@gmail.com</a>
+      <div class="links">
+        <a class="u" href="https://t.me/gigamike666" target="_blank" rel="noopener">Telegram @gigamike666<span class="vh"> (opens in new tab)</span></a>
+        <a class="u" href="https://linkedin.com/in/mikhail-kolatau" target="_blank" rel="noopener">linkedin.com/in/mikhail-kolatau<span class="vh"> (opens in new tab)</span></a>
+        <a class="u" href="https://github.com/MishaKolotov" target="_blank" rel="noopener">github.com/MishaKolotov<span class="vh"> (opens in new tab)</span></a>
+        <a class="u" href="#cv">Download CV (PDF)</a>
+      </div>
+    </div>
+  </section>
+
+
+</main>
+<div class="wrap"><footer><span>Mikhail Kolatau · Warsaw</span><span>Numbers since 2025 come from git or my own measurements. Older ones are from my CV or an archived repo.</span></footer></div>
+<script>
+// open a collapsed block when a link points at it
+function openTarget(){var t=document.getElementById(location.hash.slice(1));if(t&&t.tagName==="DETAILS")t.open=true}
+addEventListener("hashchange",openTarget);openTarget();
+</script>
+</body>
+</html>
