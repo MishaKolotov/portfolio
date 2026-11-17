@@ -119,15 +119,16 @@ export const experience: Job[] = [
         context: 'Four Angular products and a Spring Boot service for German compliance teams.',
         bullets: [
           '**Main frontend author of two products**: document management and a whistleblowing platform.',
-          'Wrote the Playwright E2E suite, **169 tests in 31 files**.',
+          'Built the design system for the e-invoice product from scratch in **Atomic Design**: 15 atoms, 12 molecules, 4 organisms.',
         ],
         more: [
+          'Wrote the Playwright E2E suite, 169 tests in 31 files.',
           'Put a Tiptap rich-text editor (React 19) inside the Angular app, with support for collaborative editing. Built a reporting library with drag-and-drop dashboards on GridStack and ECharts.',
-          'E-invoice validation product, merged to staging. I built the Angular 21 frontend on my own layer of 31 components, plus part of the Spring Boot backend (multi-tenancy, sign-up with email verification, rate limiting).',
+          'E-invoice validation product, merged to staging. I built the Angular 21 frontend on that design system, plus part of the Spring Boot backend (multi-tenancy, sign-up with email verification, rate limiting).',
           'Second-largest contributor to the shared design system of 80 components, used by three product apps. Led its upgrade from Angular 20 to 21 in a day.',
         ],
         moreLabel: 'about the Oreamnos work',
-        chips: ['Angular 21', 'Nx', 'NgRx Signals', 'PrimeNG', 'Tailwind 4', 'Tiptap', 'Playwright', 'Spring Boot', 'Keycloak', 'WCAG AA'],
+        chips: ['Angular 21', 'Atomic Design', 'Nx', 'NgRx Signals', 'PrimeNG', 'Tailwind 4', 'Tiptap', 'Playwright', 'Spring Boot', 'Keycloak', 'WCAG AA'],
       },
     ],
   },
@@ -247,6 +248,17 @@ export const projects: Project[] = [
     links: [ext('Open the app', 'https://automix-delta.vercel.app')],
   },
   {
+    name: ext('Bandcogs', 'https://bandcogs.vercel.app'),
+    status: 'in progress',
+    summary: 'An app for bands, mobile first. A band runs its activity in the app and sees where the members expect different things. I am building it now.',
+    bullets: [
+      'One Nx monorepo holds the Next.js web app, the NestJS API and the React Native app on Expo.',
+      'The mobile app has Apple sign-in, audio playback and animations on Reanimated.',
+    ],
+    chips: ['React Native', 'Expo', 'Next.js 16', 'NestJS', 'Nx', 'TanStack Query', 'Supabase'],
+    links: [ext('Open the app', 'https://bandcogs.vercel.app')],
+  },
+  {
     name: ext('big-s-studio', 'https://gigamike666.com'),
     status: 'live',
     summary: 'The site of my recording studio. Artists leave comments right on the audio waveform, and I update the site from a Telegram bot. It has its own design system.',
@@ -266,7 +278,6 @@ export const projects: Project[] = [
 ];
 
 export const moreProjects: MoreProject[] = [
-  { name: ext('Bandcogs', 'https://bandcogs.vercel.app'), text: 'An app for bands. Next.js, NestJS, React Native with Expo, Supabase.', status: 'in progress' },
   { name: ext('agent-harness', 'https://github.com/MishaKolotov/agent-harness'), text: 'Safety rules for coding agents. Every rule has a test that proves it blocks what it should.', status: 'public repo' },
   { name: ext('ctaio-jobfit', 'https://ctaio-jobfit.vercel.app'), text: 'Matches a CV to 406 open postings with one model call.', status: 'live demo' },
   { name: ext('under-big-black-sun', 'https://under-the-big-black-sun.vercel.app'), text: 'A photo zine in English and Polish. Payload CMS, Next.js 15, Postgres.', status: 'live' },

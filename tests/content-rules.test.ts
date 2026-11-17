@@ -61,8 +61,8 @@ describe('content rules', () => {
     expect(contact.links.length).toBe(4);
   });
   it('counts', () => {
-    expect(moreProjects.length).toBe(9);
-    expect(projects.length).toBe(4);
+    expect(moreProjects.length).toBe(8);
+    expect(projects.length).toBe(5);
     expect(stack.length).toBe(8);
   });
 });
